@@ -1,1 +1,1 @@
-This is a flask application to render a screenshot of an url. Gunicorn listens on port 8000 for requests with the parameter ?url= and returns a screenshot of this url.
+This is a flask application to render a screenshot of an url. Gunicorn listens on port 8000 for requests with the parameter ?url= and returns a screenshot of this url. Optionally there is a "size=" parameter, which sets the "--window-size" of firefox. You can define the x value or x,y. [Firefox documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Headless_mode#Taking_screenshots)

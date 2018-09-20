@@ -1,5 +1,6 @@
 import io
 import os
+import re
 import tempfile
 import subprocess
 from flask import Flask, request, send_file
@@ -13,7 +14,15 @@ def screenshot():
         return "no url specified", 404
 
     _, temp = tempfile.mkstemp()
-    subprocess.call(['firefox', '-headless', '-screenshot', temp, url])
+    parameter = ['firefox', '-headless', '-screenshot', temp, url]
+
+    size = request.args.get("size", "")
+    if re.match(r"^\d+(,\d+)?$", size):
+        parameter.append(
+            "--window-size=%s" % (size,)
+        )
+
+    subprocess.call(parameter)
 
     content = ""
     with open(temp, 'rb') as file:
